@@ -380,7 +380,7 @@
           <div class="col-md-6 mt-4 mt-md-0">
             <div class="icon-box">
               <i class="bi bi-briefcase"></i>
-              <h4><a href="#">Sinistro</a></h4>
+              <h4><a href="inner-page.html">Sinistro</a></h4>
               <p>Faça você mesmo a sua solicitação de sinistro, é rápida, prática e eficiênte</p>
             </div>
           </div>
@@ -602,21 +602,26 @@
           <div class="col-lg-6 mt-4 mt-lg-0">
             <!-- Substitua o formulário de contato pelo chatbot -->
             <h5>Nosso chat está disponível 24h por dia para melhor te atender</h5>
-            <div id="webchat" style="width: 100%; height: 500px;"></div>
+            <div id="webchat"></div>
           </div>
   
         </div>
       </div>
     </section><!-- Fim da Seção de Contato -->
   
+    
     <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
     <script>
       (async function () {
-        // Crie um token de acesso direto ou use sua chave secreta
-        const res = await fetch('https://webchat.botframework.com/api/tokens', { method: 'GET', headers: { 'Authorization': 'Bearer SUA_CHAVE_SECRETA_AQUI' } });
-        const token = await res.text();
-  
-        // Inicialize o Web Chat com seu token
+        const res = await fetch('https://directline.botframework.com/v3/directline/tokens/generate', { 
+          method: 'POST', 
+          headers: { 
+            'Authorization': 'Bearer D26BxUkdviY.qpWwWOi9lfoyiGRnZ0wQNQynpiJ_gg8w6DvjasMubUY',
+            'Content-Type': 'application/json'
+          } 
+        });
+        const { token } = await res.json();
+      
         window.WebChat.renderWebChat({
           directLine: window.WebChat.createDirectLine({ token })
         }, document.getElementById('webchat'));
